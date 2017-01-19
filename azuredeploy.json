@@ -34,10 +34,11 @@
       "metadata": {
         "description": "Describes plan's instance count"
       }
+    },
+    "webSiteName": {
+      "type": "string",
+      "minLength": 1
     }
-  },
-  "variables": {
-    "webSiteName": "[concat('webSite', uniqueString(resourceGroup().id))]"
   },
   "resources": [
     {
