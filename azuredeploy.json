@@ -87,7 +87,7 @@
           ],
           "properties": {
             "RepoUrl": "[parameters('repoUrl')]",
-            "branch": "master",
+            "branch": "valo1.11",
             "IsManualIntegration": true
           }
         }
