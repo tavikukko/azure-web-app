@@ -38,6 +38,10 @@
     "webSiteName": {
       "type": "string",
       "minLength": 1
+    },
+    "repoUrl": {
+      "type": "string",
+      "minLength": 1
     }
   },
   "resources": [
@@ -82,7 +86,7 @@
             "[resourceId('Microsoft.Web/sites', parameters('webSiteName'))]"
           ],
           "properties": {
-            "RepoUrl": "https://github.com/davidebbo-test/Mvc52Application.git",
+            "RepoUrl": "[parameters('repoUrl')]",
             "branch": "master",
             "IsManualIntegration": true
           }
