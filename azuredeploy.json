@@ -139,7 +139,7 @@
       "name": "[parameters('funcAppName')]",
       "type": "Microsoft.Web/sites",
       "kind": "functionapp",
-      "location": "[parameters('location')]",
+      "location": "[resourceGroup().location]",
       "dependsOn": [
         "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName'))]",
         "[resourceId('Microsoft.Web/serverfarms/', parameters('hostingPlanName'))]"
