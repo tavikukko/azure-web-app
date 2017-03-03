@@ -58,7 +58,8 @@
   },
   "variables": {
     "lowerSiteName": "[toLower(parameters('funcAppName'))]",
-    "storageAccountName": "[concat(variables('lowerSiteName'))]"
+    "storageAccountName": "[concat(variables('lowerSiteName'))]",
+    "storageAccountType": "Standard_LRS"
   },
   "resources": [
     {
@@ -128,7 +129,7 @@
       "type": "Microsoft.Storage/storageAccounts",
       "name": "[variables('storageAccountName')]",
       "apiVersion": "2015-05-01-preview",
-      "location": "[variables('storageLocation')]",
+      "location": "[resourceGroup().location]",
       "properties": {
         "accountType": "[variables('storageAccountType')]"
       }
