@@ -57,7 +57,7 @@
   "variables": {
     "servicesHostingPlanName": "valo-services-hosting-plan",
     "funcHostingPlanName": "valo-func-hosting-plan",
-    "storageAccountName": "[concat('valo-func-sa-', uniqueString(resourceGroup().id))]",
+    "storageAccountName": "[concat('valofuncsa', uniqueString(resourceGroup().id))]",
     "storageAccountid": "[concat(resourceGroup().id,'/providers/','Microsoft.Storage/storageAccounts/', variables('storageAccountName'))]"
   },
   "resources": [
