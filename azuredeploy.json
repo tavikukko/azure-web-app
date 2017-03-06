@@ -134,14 +134,19 @@
       }
     },
     {
-      "type": "Microsoft.Web/serverfarms",
       "apiVersion": "2015-08-01",
       "name": "[variables('funcHostingPlanName')]",
+      "type": "Microsoft.Web/serverfarms",
       "location": "[resourceGroup().location]",
+      "tags": {
+        "displayName": "HostingPlan"
+      },
+      "sku": {
+        "name": "[parameters('skuName')]",
+        "capacity": 1
+      },
       "properties": {
-        "name": "[variables('funcHostingPlanName')]",
-        "computeMode": "Dynamic",
-        "sku": "Dynamic"
+        "name": "[variables('servicesHostingPlanName')]"
       }
     },
     {
