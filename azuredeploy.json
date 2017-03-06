@@ -55,15 +55,14 @@
     }
   },
   "variables": {
-    "servicesHostingPlanName": "valo-services-hosting-plan",
-    "funcHostingPlanName": "valo-func-hosting-plan",
+    "hostingPlanName": "valo-hosting-plan",
     "storageAccountName": "[concat('valofuncsa', uniqueString(resourceGroup().id))]",
     "storageAccountid": "[concat(resourceGroup().id,'/providers/','Microsoft.Storage/storageAccounts/', variables('storageAccountName'))]"
   },
   "resources": [
     {
       "apiVersion": "2015-08-01",
-      "name": "[variables('servicesHostingPlanName')]",
+      "name": "[variables('hostingPlanName')]",
       "type": "Microsoft.Web/serverfarms",
       "location": "[resourceGroup().location]",
       "tags": {
@@ -74,7 +73,7 @@
         "capacity": 1
       },
       "properties": {
-        "name": "[variables('servicesHostingPlanName')]"
+        "name": "[variables('hostingPlanName')]"
       }
     },
     {
@@ -83,15 +82,15 @@
       "type": "Microsoft.Web/sites",
       "location": "[resourceGroup().location]",
       "tags": {
-        "[concat('hidden-related:', resourceGroup().id, '/providers/Microsoft.Web/serverfarms/', variables('servicesHostingPlanName'))]": "Resource",
+        "[concat('hidden-related:', resourceGroup().id, '/providers/Microsoft.Web/serverfarms/', variables('hostingPlanName'))]": "Resource",
         "displayName": "Website"
       },
       "dependsOn": [
-        "[resourceId('Microsoft.Web/serverfarms/', variables('servicesHostingPlanName'))]"
+        "[resourceId('Microsoft.Web/serverfarms/', variables('hostingPlanName'))]"
       ],
       "properties": {
         "name": "[parameters('webSiteName')]",
-        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('servicesHostingPlanName'))]"
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('hostingPlanName'))]"
       },
       "resources": [
         {
@@ -135,32 +134,16 @@
     },
     {
       "apiVersion": "2015-08-01",
-      "name": "[variables('funcHostingPlanName')]",
-      "type": "Microsoft.Web/serverfarms",
-      "location": "[resourceGroup().location]",
-      "tags": {
-        "displayName": "HostingPlan"
-      },
-      "sku": {
-        "name": "[parameters('skuName')]",
-        "capacity": 1
-      },
-      "properties": {
-        "name": "[variables('servicesHostingPlanName')]"
-      }
-    },
-    {
-      "apiVersion": "2015-08-01",
       "type": "Microsoft.Web/sites",
       "name": "[parameters('funcAppName')]",
       "location": "[resourceGroup().location]",
       "kind": "functionapp",
       "dependsOn": [
-        "[resourceId('Microsoft.Web/serverfarms', variables('funcHostingPlanName'))]",
+        "[resourceId('Microsoft.Web/serverfarms', variables('hostingPlanName'))]",
         "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName'))]"
       ],
       "properties": {
-        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('funcHostingPlanName'))]",
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('hostingPlanName'))]",
         "siteConfig": {
           "appSettings": [
             {
